@@ -26,7 +26,7 @@ class Tabelas {
             if (erro) {
                 console.log(erro)
             } else {
-                console.log('Tablea Pets criada com sucesso')
+                console.log('Tabela Pets criada com sucesso')
             }
         })
     }

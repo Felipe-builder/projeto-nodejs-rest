@@ -1,4 +1,5 @@
 const conexao = require('../infraestrutura/database/conexao')
+const repositorio = require('../repositorios/pet')
 const uploadDeArquivo = require('../infraestrutura/arquivos/uploadDeArquivos')
 
 class Pet {
@@ -19,10 +20,12 @@ class Pet {
                         res.status(200).json(novoPet)
                     }
                 })
-            }
-            
+            }            
         })
-        
+    }
+
+    lista() {
+        return repositorio.lista()
     }
 }
 
