@@ -6,6 +6,12 @@ class Pet {
 
         return query(sql)
     }
+
+    adiciona(novoPet) {
+        const sql = 'INSERT INTO Pets SET ?'
+
+        return query(sql, novoPet)
+    }
 }
 
 module.exports = new Pet()
