@@ -1,0 +1,92 @@
+[
+  {
+      "id": 1,
+      "nome": "Harry",
+      "imagem": "./imagens/pastor-alemao.jpg"
+  },
+  {
+      "id": 2,
+      "nome": "Harry1",
+      "imagem": "./assets/imagens/Harry1"
+  },
+  {
+      "id": 3,
+      "nome": "Harry1",
+      "imagem": "./assets/imagens/Harry1.jpg"
+  },
+  {
+      "id": 4,
+      "nome": "Harry1",
+      "imagem": "./assets/imagens/Harry1.jpg"
+  },
+  {
+      "id": 5,
+      "nome": "Canion",
+      "imagem": "./assets/imagens/Canion.jpg"
+  },
+  {
+      "id": 6,
+      "nome": "Najdorf",
+      "imagem": "./assets/imagens/Najdorf.jpg"
+  },
+  {
+      "id": 7,
+      "nome": "Alekhine",
+      "imagem": "./assets/imagens/Alekhine.jpg"
+  },
+  {
+      "id": 8,
+      "nome": "Alekhine",
+      "imagem": "./assets/imagens/Alekhine.jpg"
+  },
+  {
+      "id": 9,
+      "nome": "CapaBlanca",
+      "imagem": "./assets/imagens/CapaBlanca.jpg"
+  },
+  {
+      "id": 10,
+      "nome": "CapaBlanca",
+      "imagem": "./assets/imagens/CapaBlanca.jpg"
+  },
+  {
+      "id": 11,
+      "nome": "CapaBlanca",
+      "imagem": "./assets/imagens/CapaBlanca.jpg"
+  },
+  {
+      "id": 12,
+      "nome": "CapaBlanca",
+      "imagem": "./assets/imagens/CapaBlanca.jpg"
+  },
+  {
+      "id": 13,
+      "nome": "CapaBlanca",
+      "imagem": "./assets/imagens/CapaBlanca.jpg"
+  },
+  {
+      "id": 14,
+      "nome": "CapaBlanca",
+      "imagem": "./assets/imagens/CapaBlanca.jpg"
+  },
+  {
+      "id": 15,
+      "nome": "CapaBlanca",
+      "imagem": "./assets/imagens/CapaBlanca.jpg"
+  },
+  {
+      "id": 16,
+      "nome": "CapaBlanca1",
+      "imagem": "./assets/imagens/CapaBlanca1.jpg"
+  },
+  {
+      "id": 17,
+      "nome": "CapaBlanca1",
+      "imagem": "./assets/imagens/CapaBlanca1.jpg"
+  },
+  {
+      "id": 18,
+      "nome": "CapaBlanca1",
+      "imagem": "./assets/imagens/CapaBlanca1.jpg"
+  }
+]
