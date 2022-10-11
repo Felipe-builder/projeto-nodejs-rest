@@ -1,0 +1,14 @@
+{
+  "id": 9,
+  "cliente": {
+    "cpf": "41422303499",
+    "nome": "Alden Rempel",
+    "dataDeNascimento": "2022-09-17T16:20:26.682Z"
+  },
+  "pet": "Zorros",
+  "servico": "tosa",
+  "status": "agendado",
+  "observacoes": "brincalhão",
+  "data": "2022-01-25T03:00:00.000Z",
+  "dataCriacao": "2021-11-17T20:12:59.000Z"
+}
