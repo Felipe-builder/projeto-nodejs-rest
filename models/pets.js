@@ -29,6 +29,12 @@ class Pet {
   lista() {
     return repositorio.lista();
   }
+
+  buscaPorId(id) {
+    return repositorio.buscaPorId(id)
+      .then((atendimento) => atendimento)
+      .catch((err) => new Error(err));
+  }
 }
 
 module.exports = new Pet();

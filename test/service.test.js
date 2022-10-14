@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-console */
 const sinon = require('sinon');
@@ -6,31 +7,54 @@ const Service = require('./service');
 
 const Atendimentos = require('../models/atendimentos');
 
-const BASE_URL_1 = 'http://localhost:3000/atendimentos';
-const BASE_URL_2 = 'http://localhost:3000/atendimentos/41422303499';
-const BASE_URL_3 = 'http://localhost:3000/atendimentos/11322455524';
+const baseUrl = 'http://localhost:3000';
 
 const mocks = {
-  aldenRempel: require('../mocks/atendimentosGetOne.json'),
-  eleazarHamill: require('../mocks/atendimentosGetOne1.json'),
+  client: {
+    aldenRempel: require('../mocks/atendimentosGetOne.json'),
+    eleazarHamill: require('../mocks/atendimentosGetOne1.json'),
+  },
+  pet: {
+    harry: require('../mocks/petsGetOne1.json'),
+    alekhine: require('../mocks/petsGetOne1.json'),
+  },
 };
 
+async function gerenateMock(url) {
+  {
+    const service = new Service();
+    const withoutStub = await service.makeRequest(url);
+    console.log(JSON.stringify(withoutStub));
+  }
+}
+
 (async () => {
-  // {
-  //   const service = new Service();
-  //   const withoutStub = await service.makeRequest(BASE_URL_3);
-  //   console.log(JSON.stringify(withoutStub));
-  // }
   const service = new Service();
   const stub = sinon.stub(service, service.makeRequest.name);
+  const url2 = `${baseUrl}/atendimentos/41422303499`;
+  const url3 = `${baseUrl}/atendimentos/11322455524`;
+  const urlPet = {
+    pet1: `${baseUrl}/pets/1`,
+    pet2: `${baseUrl}/pets/8`,
+  };
 
   stub
-    .withArgs(BASE_URL_2)
-    .resolves(mocks.aldenRempel);
+    .withArgs(url2)
+    .resolves(mocks.client.aldenRempel);
 
   stub
-    .withArgs(BASE_URL_3)
-    .resolves(mocks.eleazarHamill);
+    .withArgs(url3)
+    .resolves(mocks.client.eleazarHamill);
+
+  stub
+    .withArgs(urlPet.pet1)
+    .resolves(mocks.pet.harry);
+
+  stub
+    .withArgs(urlPet.pet2)
+    .resolves(mocks.pet.alekhine);
+
+  // await gerenateMock(urlPet.pet2);
 
   // {
   //   const response = await service.makeRequest(BASE_URL_2);
@@ -38,19 +62,20 @@ const mocks = {
   // }
 
   {
-    const response = await service.getResumeAtendimento(BASE_URL_3);
-    console.log('response', response);
-  }
-  {
     const expected = {
       cliente: { nome: 'Alden Rempel', idade: 0 },
       pet: 'Zorros',
       servico: 'tosa',
     };
 
-    const results = await service.getResumeAtendimento(BASE_URL_2);
+    const results = await service.getResumeAtendimento(url2);
     deepStrictEqual(results, expected);
   }
+
+  // {
+  //   const response = await service.getResumeAtendimento(url3);
+  //   console.log('response', response);
+  // }
 
   {
     const expected = {
@@ -59,7 +84,11 @@ const mocks = {
       servico: 'tosa',
     };
 
-    const results = await service.getResumeAtendimento(BASE_URL_3);
+    const results = await service.getResumeAtendimento(url3);
     deepStrictEqual(results, expected);
   }
+
+  // {
+  //   const response
+  // }
 })();

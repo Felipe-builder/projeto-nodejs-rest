@@ -8,6 +8,12 @@ class Pet {
     return query(sql);
   }
 
+  buscaPorId(id) {
+    const sql = `SELECT * FROM Pets WHERE id = ${id}`;
+
+    return query(sql);
+  }
+
   adiciona(novoPet) {
     const sql = 'INSERT INTO Pets SET ?';
 
