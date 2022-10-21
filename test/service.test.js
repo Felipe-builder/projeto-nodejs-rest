@@ -16,7 +16,7 @@ const mocks = {
   },
   pet: {
     harry: require('../mocks/petsGetOne1.json'),
-    alekhine: require('../mocks/petsGetOne1.json'),
+    alekhine: require('../mocks/petsGetOne2.json'),
   },
 };
 
@@ -88,7 +88,25 @@ async function gerenateMock(url) {
     deepStrictEqual(results, expected);
   }
 
-  // {
-  //   const response
-  // }
+  {
+    const expected = {
+      id: 1,
+      nome: 'Harry',
+      imagem: './imagens/pastor-alemao.jpg',
+    };
+
+    const results = await service.getResumeAtendimento(urlPet.pet1);
+    deepStrictEqual(results, expected);
+  }
+
+  {
+    const expected = {
+      id: 8,
+      nome: 'Alekhine',
+      imagem: './assets/imagens/Alekhine.jpg',
+    };
+
+    const results = await service.getResumeAtendimento(urlPet.pet2);
+    deepStrictEqual(results, expected);
+  }
 })();
