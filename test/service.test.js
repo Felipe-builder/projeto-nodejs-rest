@@ -4,7 +4,7 @@
 const sinon = require('sinon');
 const { deepStrictEqual } = require('assert');
 const Service = require('./service');
-
+const AtendimentosHelper = require('../helpers/atendimentos-helper');
 const Atendimentos = require('../models/atendimentos');
 
 const baseUrl = 'http://localhost:3000';
@@ -13,6 +13,7 @@ const mocks = {
   client: {
     aldenRempel: require('../mocks/atendimentosGetOne.json'),
     eleazarHamill: require('../mocks/atendimentosGetOne1.json'),
+    all: require('../mocks/atendimentosGetAll.json'),
   },
   pet: {
     harry: require('../mocks/petsGetOne1.json'),
@@ -30,7 +31,13 @@ async function gerenateMock(url) {
 
 (async () => {
   const service = new Service();
+  const atendimentosHelper = new AtendimentosHelper();
+  
   const stub = sinon.stub(service, service.makeRequest.name);
+
+  const urlClient = {
+    all: `${baseUrl}/pets`,
+  }
   const url2 = `${baseUrl}/atendimentos/41422303499`;
   const url3 = `${baseUrl}/atendimentos/11322455524`;
   const urlPet = {
@@ -54,6 +61,9 @@ async function gerenateMock(url) {
     .withArgs(urlPet.pet2)
     .resolves(mocks.pet.alekhine);
 
+  stub
+    .withArgs(urlClient.all)
+    .resolves(mocks.client.all);
   // await gerenateMock(urlPet.pet2);
 
   // {
@@ -108,5 +118,11 @@ async function gerenateMock(url) {
 
     const results = await service.getResumeAtendimento(urlPet.pet2);
     deepStrictEqual(results, expected);
+  }
+
+  {
+    const response = await service.makeRequest(urlClient.all);
+    const results = atendimentosHelper.dashboard(response);
+    console.log(results);
   }
 })();

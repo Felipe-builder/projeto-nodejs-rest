@@ -8,6 +8,14 @@ module.exports = (app) => {
       .catch((erros) => res.status(400).json(erros));
   });
 
+  app.get('/atendimentos/dashboard', (req, res) => {
+    Atendimento.lista()
+      .then((resultados) => {
+        res.json(resultados);
+      })
+      .catch((erros) => res.status(400).json(erros));
+  });
+
   app.get('/atendimentos/:id', (req, res) => {
     const id = parseInt(req.params.id);
 
