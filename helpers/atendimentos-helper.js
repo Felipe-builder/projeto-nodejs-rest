@@ -7,8 +7,9 @@ class AtendimentosHelper {
 
   dashboard(dados) {
     this.dashboardDatas = {
-      ocorrenciaNomes: [],
-      ocorrenciaServicos: [],
+      ocorrenciaCliente: [],
+      ocorrenciaPet: [],
+      ocorrenciaServico: [],
       ocorrenciaStatus: [],
       ocorrenciaData: [],
     };
@@ -20,17 +21,33 @@ class AtendimentosHelper {
     if (!value || !value.length) {
       return this.dashboardDatas;
     }
-    const nomeAtual = value[0].cliente.toLowerCase();
-    if (!this.dashboardDatas.ocorrenciaNomes.includes(nomeAtual)) {
-      const totalNome = value.reduce((total, occ) => (occ.cliente.toLowerCase()
-        .includes(nomeAtual) ? total + 1 : total), 0);
-      this.dashboardDatas.ocorrenciaNomes.push(
-        { nomeAtual, totalNome },
-      );
-    }
-    console.log(value);
-    value.shift();
+    this.upsertDashboardDatas(value);
+    console.log();
     return this.countOccurrences(value);
+  }
+
+  upsertDashboardDatas(dados) {
+    const dadoTransforned = this.dataTransformationValueDashboardAtendimento(dados.shift());
+    Object.entries(dadoTransforned).forEach(([key, value]) => {
+      const dashboardKey = `ocorrencia${key}`;
+      if (!this.dashboardDatas[dashboardKey].includes(value)) {
+        const totalDoCampo = dados.reduce((total, occ) => (occ[key.toLocaleLowerCase()].toLowerCase()
+          .includes(value.toLocaleLowerCase()) ? total + 1 : total), 0);
+        this.dashboardDatas[dashboardKey].push(
+          { key, totalDoCampo },
+        );
+      }
+    });
+  }
+
+  dataTransformationValueDashboardAtendimento(dado) {
+    return {
+      Cliente: dado.cliente,
+      Pet: dado.pet,
+      Servico: dado.servico,
+      Status: dado.status,
+      Data: dado.data,
+    };
   }
 }
 
