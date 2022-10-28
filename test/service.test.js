@@ -2,6 +2,7 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-console */
 const sinon = require('sinon');
+const assert = require('assert');
 const { deepStrictEqual } = require('assert');
 const Service = require('./service');
 const AtendimentosHelper = require('../helpers/atendimentos-helper');
@@ -122,7 +123,10 @@ async function gerenateMock(url) {
 
   {
     const response = await service.makeRequest(urlClient.all);
+    const spy = sinon.spy(atendimentosHelper, atendimentosHelper.countOccurrences.name);
     const results = atendimentosHelper.dashboard(response);
+    const expectedCallCount = (response.length + 1);
     console.log(results);
+    assert.deepStrictEqual(spy.callCount, expectedCallCount);
   }
 })();

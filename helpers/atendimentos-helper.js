@@ -2,10 +2,6 @@
 /* eslint-disable no-plusplus */
 class AtendimentosHelper {
   constructor() {
-    this.dashboardDatas = null;
-  }
-
-  dashboard(dados) {
     this.dashboardDatas = {
       ocorrenciaCliente: [],
       ocorrenciaPet: [],
@@ -13,8 +9,12 @@ class AtendimentosHelper {
       ocorrenciaStatus: [],
       ocorrenciaData: [],
     };
+  }
 
-    return this.countOccurrences(dados);
+  dashboard(dados) {
+    const newArray = dados.slice();
+
+    return this.countOccurrences(newArray);
   }
 
   countOccurrences(value) {
@@ -22,7 +22,6 @@ class AtendimentosHelper {
       return this.dashboardDatas;
     }
     this.upsertDashboardDatas(value);
-    console.log();
     return this.countOccurrences(value);
   }
 
@@ -34,7 +33,7 @@ class AtendimentosHelper {
         const totalDoCampo = dados.reduce((total, occ) => (occ[key.toLocaleLowerCase()].toLowerCase()
           .includes(value.toLocaleLowerCase()) ? total + 1 : total), 0);
         this.dashboardDatas[dashboardKey].push(
-          { key, totalDoCampo },
+          { value, totalDoCampo },
         );
       }
     });
