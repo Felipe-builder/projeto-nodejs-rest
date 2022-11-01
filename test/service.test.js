@@ -15,6 +15,7 @@ const mocks = {
     aldenRempel: require('../mocks/atendimentosGetOne.json'),
     eleazarHamill: require('../mocks/atendimentosGetOne1.json'),
     all: require('../mocks/atendimentosGetAll.json'),
+    resultDashboard: require('../mocks/expectedResultAtendimentoDashboard.json'),
   },
   pet: {
     harry: require('../mocks/petsGetOne1.json'),
@@ -124,9 +125,14 @@ async function gerenateMock(url) {
   {
     const response = await service.makeRequest(urlClient.all);
     const spy = sinon.spy(atendimentosHelper, atendimentosHelper.countOccurrences.name);
-    const results = atendimentosHelper.dashboard(response);
+    const [...results] = atendimentosHelper.dashboard(response);
     const expectedCallCount = (response.length + 1);
-    console.log(results);
+    // console.log(JSON.stringify(results));
     assert.deepStrictEqual(spy.callCount, expectedCallCount);
+    const { args } = spy.getCall(12);
+    const exepectedResult = mocks.client.resultDashboard;
+    const expectParams = mocks.client.all;
+    assert.deepStrictEqual(args, expectParams);
+    assert.deepStrictEqual(results, exepectedResult);
   }
 })();

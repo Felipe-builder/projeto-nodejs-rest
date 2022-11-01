@@ -17,12 +17,13 @@ class AtendimentosHelper {
     return this.countOccurrences(newArray);
   }
 
-  countOccurrences(value) {
+  *countOccurrences(value) {
     if (!value || !value.length) {
-      return this.dashboardDatas;
+      return 0;
     }
+    yield this.dashboardDatas;
     this.upsertDashboardDatas(value);
-    return this.countOccurrences(value);
+    yield* this.countOccurrences(value);
   }
 
   upsertDashboardDatas(dados) {
